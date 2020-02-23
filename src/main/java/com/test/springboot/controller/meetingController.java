@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class meetingController {
 	
+	
+
+	
 	//读取配置文件中的自定义属性值
 	@Value("${spring.name}")
 	private String name;
