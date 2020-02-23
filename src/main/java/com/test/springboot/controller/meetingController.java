@@ -7,17 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 @EnableAutoConfiguration
 @Controller
-public class a {
+public class meetingController {
 	
 	//读取配置文件中的自定义属性值
 	@Value("${spring.name}")
 	private String name;
 	
 	
-	@RequestMapping("/")
+	@RequestMapping("/test")
 	@ResponseBody
-	public String dd() {
+	public String test() {
 		return "hello world"+"     "+name;
+	}
+
+	
+	@RequestMapping("/index")
+	public String index() {
+		return "views/index";
 	}
 
 }

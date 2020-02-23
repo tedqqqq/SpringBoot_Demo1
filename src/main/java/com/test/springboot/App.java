@@ -3,7 +3,7 @@ package com.test.springboot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-import com.test.springboot.controller.a;
+import com.test.springboot.controller.meetingController;
 
 /**
  * Hello world!
@@ -14,6 +14,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        SpringApplication.run(a.class, args);
+        SpringApplication.run(meetingController.class, args);
     }
 }
