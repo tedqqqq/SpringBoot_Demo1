@@ -28,7 +28,7 @@ import com.test.openmeetings.roomservice.Type2;
 
 
 
-@RestController
+@Controller
 @RequestMapping(value="/op")
 //@Api(value="测试对接openmeetings",tags="op")
 public class SysmenuController {
@@ -73,11 +73,22 @@ public class SysmenuController {
     	return dto;
     }
     
-   // @ApiOperation(value="老师加入公共房间")  
+    /**
+     * 主页面
+     * @return
+     */
+    @RequestMapping("/index")
+    public String index() {
+    	return "views/index";
+    }
+    
+    
+    // @ApiOperation(value="老师加入公共房间")  
+    //roomID为公共房间ID
     @RequestMapping(value="/addToRoom",method=RequestMethod.POST)
     public ServiceResult createRoom(String id,String fname,String lname,Long roomId) throws RemoteException{
 
-        String sid = getSid("duyu","Dy@@2017");
+        String sid = getSid("admin","Aa1111!!");
         //创建外部人员访问信息
         ExternalUserDTO user = new ExternalUserDTO();
         user.setEmail("zda@dwa.com");
@@ -100,6 +111,8 @@ public class SysmenuController {
 
         return serviceRs;
     }
+    
+
 
 //  //  @ApiOperation(value="给学生随机分配面试房间")  
 //    @RequestMapping(value="/randomToRoom",method=RequestMethod.POST)
@@ -161,15 +174,18 @@ public class SysmenuController {
 
  //   @ApiOperation(value="老师创建自定义房间")  
     @RequestMapping(value="/customizeRoom",method=RequestMethod.POST)
+    @ResponseBody
     public ServiceResult customizeRoom(String id,String fname,String lname,String ty,long num) throws RemoteException{
 
         //得到service
-        String sid = getSid("duyu","Dy@@2017");
+        String sid = getSid("admin","Aa1111!!");
 
         RoomDTO room = new RoomDTO();
         room.setType(Type2.fromValue(ty));
         room.setCapacity(num);
         room.setAllowRecording(true);
+        room.setName("测试新增房间");
+//        room.setIsPublic(true);
         room = roomService.add(sid, room);
 
         //创建外部人员访问信息
@@ -196,6 +212,59 @@ public class SysmenuController {
     }
 
 
+
+    
+    //测试储存的房间名称
+    @RequestMapping(value="/addCustomizeRoom",method=RequestMethod.GET)
+    public String addCustomizeRoom() throws RemoteException{
+
+    	   for (Map.Entry<Long, Integer> m : roomCountersMap.entrySet()) {
+    	        System.out.println("key:" + m.getKey() + " value:" + m.getValue());
+    	    }
+    	   String sid=getSid("admin", "Aa1111!!");
+    	   //公开房间
+    	   List<RoomDTO> listRoom=roomService.getPublic(sid, "conference");
+    	   for(RoomDTO room:listRoom) {
+    		   System.err.println(room.getName());
+    	   }
+    
+    	 
+    	   return "hello world";
+    }
+    
+
+    
+    @ResponseBody
+    @RequestMapping(value="/testHashCode",method=RequestMethod.POST)
+    public ServiceResult testHashCode(String id,String fname,String lname,long roomId){
+
+
+      //用户登录，获取sid
+      String sid = getSid("test","Aa1111!");
+
+      System.err.println(roomId);
+      ExternalUserDTO user = new ExternalUserDTO();
+      user.setEmail("zda@dwa.com");
+      user.setExternalId(id);
+      user.setExternalType("Teacher");
+      user.setFirstname(fname);
+      user.setLastname(lname);
+      user.setLogin("T"+id);
+
+      RoomOptionsDTO options = new RoomOptionsDTO();
+      options.setRoomId(roomId);
+      options.setShowAudioVideoTest(true);
+      options.setModerator(true);
+
+
+      ServiceResult serviceRs = userService.getRoomHash(sid, user, options);
+      System.out.println(serviceRs.getMessage());
+
+
+      return serviceRs;
+    }
+  
+    
     /**
      * 得到某个登录用户的sid
      */

@@ -26,7 +26,7 @@ public class meetingController {
 	
 	@RequestMapping("/index")
 	public String index() {
-		return "views/index";
+		return "views/welcome";
 	}
 
 }
