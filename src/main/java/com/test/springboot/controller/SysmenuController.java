@@ -7,14 +7,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.meetings.userwebService.ExternalUserDTO;
 import com.test.meetings.userwebService.OrgApacheOpenmeetingsWebserviceUserWebService;
 import com.test.meetings.userwebService.RoomOptionsDTO;
 import com.test.meetings.userwebService.ServiceResult;
+import com.test.meetings.userwebService.UserDTO;
 import com.test.meetings.userwebService.UserWebService;
 import com.test.openmeetings.roomservice.OrgApacheOpenmeetingsWebserviceRoomWebService;
 import com.test.openmeetings.roomservice.RoomDTO;
@@ -41,6 +44,35 @@ public class SysmenuController {
         roomService = orgRoom.getRoomWebServicePort();
     }
 
+    /**
+     * 返回用户sid
+     * @return
+     */
+    @RequestMapping(value = "/getSid",method = RequestMethod.GET)
+    @ResponseBody
+    public String getTestSid() {
+    	String sid=getSid("admin", "Aa1111!!");
+    	return sid;
+    }
+    
+    /**
+     * 创建一个新用户
+     * @return
+     */
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    @ResponseBody
+    public UserDTO addUser() {
+    	UserDTO user=new UserDTO();
+    	user.setFirstname("dd");
+    	user.setLastname("jj");
+    	//登陆名称
+    	user.setLogin("test");
+    	user.setPassword("Aa1111!!");
+    	//第一个是session值
+    	UserDTO dto=userService.add("d47bf1e5-98cf-417e-98f9-cb001c0c13fd", user, false);
+    	return dto;
+    }
+    
    // @ApiOperation(value="老师加入公共房间")  
     @RequestMapping(value="/addToRoom",method=RequestMethod.POST)
     public ServiceResult createRoom(String id,String fname,String lname,Long roomId) throws RemoteException{
