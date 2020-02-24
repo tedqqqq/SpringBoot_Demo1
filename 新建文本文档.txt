@@ -1,0 +1,19 @@
+cp /opt/mysql-connector-java-5.1.48.jar /opt/red54010/webapps/openmeetings/WEB-INF/lib
+
+wget https://cwiki.apache.org/confluence/download/attachments/27838216/red5-2
+
+开启·：/etc/init.d/red5-2 start
+
+http://localhost:5080/openmeetings
+
+systemctl start mariadb.service
+firewall-cmd --zone=public --add-port=5080/tcp --permanent
+
+
+
+
+
+wsdl2java -p com.test.meetings.userwebService -d E:\ppp -all -autoNameResolution http://IP:5080/openmeetings/services/UserService?wsdl
+
+跳入会议室连接 http://IP:5080/openmeetings/hash?secure=cfb260a6-d076-4bf6-b11a-a19779abae78
+http://IP:5080/openmeetings/hash?secure=3039b6d2-62e0-4d33-9c3e-7203e3751254
