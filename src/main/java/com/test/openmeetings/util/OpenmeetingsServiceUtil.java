@@ -27,7 +27,7 @@ public class OpenmeetingsServiceUtil {
     /**
      * 线程安全的map对象。存放sid
      */
-    private static ConcurrentHashMap<String, String> sidMap = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, String> sidMap = new ConcurrentHashMap<String, String>();
 
     private static OrgApacheOpenmeetingsWebserviceRoomWebService orgRoom = new OrgApacheOpenmeetingsWebserviceRoomWebService();
     private static OrgApacheOpenmeetingsWebserviceUserWebService orgUser = new OrgApacheOpenmeetingsWebserviceUserWebService();

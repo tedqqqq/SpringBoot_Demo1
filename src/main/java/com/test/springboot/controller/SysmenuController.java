@@ -35,7 +35,7 @@ public class SysmenuController {
 
     private static RoomWebService roomService;
     private static UserWebService userService;
-    private static Map<Long, Integer> roomCountersMap = new LinkedHashMap<>();
+    private static Map<Long, Integer> roomCountersMap = new LinkedHashMap<Long, Integer>();
 
     static {
         OrgApacheOpenmeetingsWebserviceRoomWebService orgRoom = new OrgApacheOpenmeetingsWebserviceRoomWebService();
