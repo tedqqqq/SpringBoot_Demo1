@@ -83,6 +83,8 @@ public class SysmenuController {
     }
     
     
+    
+    
     // @ApiOperation(value="老师加入公共房间")  
     //roomID为公共房间ID
     @RequestMapping(value="/addToRoom",method=RequestMethod.POST)
@@ -272,5 +274,7 @@ public class SysmenuController {
         ServiceResult rs = userService.login(name, pwd);    
         return rs.getMessage();
     }
+    
+    
 }
 

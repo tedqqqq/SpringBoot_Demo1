@@ -23,6 +23,9 @@
             <scope>test</scope>
         </dependency>
  
+ 
+		
+		
         <!-- 添加servlet依赖模块 -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -53,11 +56,17 @@
 		    <artifactId>spring-boot-devtools</artifactId>
 		    <optional>true</optional>    <!-- 这个需要为 true 热部署才有效 -->
 		</dependency>
-
+		
+		<dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+		
+		
   </dependencies>
   
   
-  <!--  
+   
     <build>
   		<plugins>
   			<plugin>
@@ -71,5 +80,5 @@
 			</plugin>
   		</plugins>
   </build>
-  -->
+
 </project>
