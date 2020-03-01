@@ -34,8 +34,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+
+import com.test.openmeetings.service.UserService;
 
 
 @EnableAutoConfiguration
@@ -98,5 +101,33 @@ public class meetingController {
 	    
                      return seesionID;
 	}    
+	
+	/**
+	 * 登陆页面
+	 * @return
+	 */
+	@RequestMapping("/login")
+	public String main() {
+		return "login";
+	}
+	
+	/**
+	 * 判断登陆操作
+	 * @return
+	 */
+	@RequestMapping(value="/meetings/login", method=RequestMethod.POST)
+	public String login() {
+		return "notifications";
+	}
+	
+	@Autowired
+	UserService userService;
+	
+	@ResponseBody
+	@RequestMapping("/db")
+	public String testDB() {
+		System.err.println(userService.list());
+		return "dffedfd";
+	}
 	
 }
