@@ -8,6 +8,7 @@ import com.test.meetings.userwebService.OrgApacheOpenmeetingsWebserviceUserWebSe
 import com.test.meetings.userwebService.RoomOptionsDTO;
 import com.test.meetings.userwebService.ServiceResult;
 import com.test.meetings.userwebService.UserWebService;
+import com.test.openmeetings.calendarservice.OrgApacheOpenmeetingsWebserviceCalendarWebService;
 import com.test.openmeetings.roomservice.OrgApacheOpenmeetingsWebserviceRoomWebService;
 import com.test.openmeetings.roomservice.RoomDTO;
 import com.test.openmeetings.roomservice.RoomWebService;
@@ -19,7 +20,7 @@ import com.test.openmeetings.roomservice.Type2;
 /**
  * openmeetings的专用工具类
  * 
- * @author psc
+ *
  *
  */
 public class OpenmeetingsServiceUtil {
@@ -31,9 +32,10 @@ public class OpenmeetingsServiceUtil {
 
     private static OrgApacheOpenmeetingsWebserviceRoomWebService orgRoom = new OrgApacheOpenmeetingsWebserviceRoomWebService();
     private static OrgApacheOpenmeetingsWebserviceUserWebService orgUser = new OrgApacheOpenmeetingsWebserviceUserWebService();
+    private static OrgApacheOpenmeetingsWebserviceCalendarWebService orgCalender=new OrgApacheOpenmeetingsWebserviceCalendarWebService();
     private static RoomWebService roomService;
     private static UserWebService userWebService;
-
+    
     /**
      * 得到RoomWebService 基于双检锁的单例模式
      * 
