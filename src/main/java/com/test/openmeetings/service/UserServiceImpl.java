@@ -21,5 +21,11 @@ public class UserServiceImpl  implements UserService {
         return userMapper.list();
     }
 
+	@Override
+	public User selecUser(String name, String password) {
+		// TODO Auto-generated method stub
+		return userMapper.selecUser(name, password);
+	}
+
  
 }

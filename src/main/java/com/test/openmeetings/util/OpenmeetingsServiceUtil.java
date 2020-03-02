@@ -19,7 +19,7 @@ import com.test.openmeetings.roomservice.Type2;
 /**
  * openmeetings的专用工具类
  * 
- * @author duyu
+ * @author psc
  *
  */
 public class OpenmeetingsServiceUtil {

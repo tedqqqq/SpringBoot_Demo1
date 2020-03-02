@@ -33,8 +33,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -46,6 +48,8 @@ import com.test.openmeetings.service.UserService;
 public class meetingController {
 	
 
+	@Autowired
+	UserService userService;
 	
 	//读取配置文件中的自定义属性值
 	@Value("${spring.name}")
@@ -116,16 +120,23 @@ public class meetingController {
 	 * @return
 	 */
 	@RequestMapping(value="/meetings/login", method=RequestMethod.POST)
-	public String login() {
-		return "notifications";
+	public String login(@RequestParam(value = "accountname", required = true) String name,@RequestParam(value = "password", required = true) String password) {
+		
+		System.err.println("获取信息"+name+"---"+password);
+		System.err.println();
+		if(!(userService.selecUser(name, password)==null)) {
+			return "notifications";
+		}else {
+			return "register";
+		}
 	}
 	
-	@Autowired
-	UserService userService;
+	
 	
 	@ResponseBody
-	@RequestMapping("/db")
-	public String testDB() {
+	@RequestMapping("/db/{1}/{2}")
+	public String testDB(@PathVariable("1") String p1,@PathVariable("2") String p2) {
+		System.err.println(p1+"----"+p2);
 		System.err.println(userService.list());
 		return "dffedfd";
 	}
